@@ -3,34 +3,19 @@
   <head lang="ru">
     <meta charset="UTF-8" />
     <title>слайдер</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
-    <main class="content">
-      <ul class="slider">
-        <li class="slider__image-block slider__image-block_left">
-          <img
-            class="slider__image"
-            src="./img/main-banners_slider2.png"
-            alt="Строительство в ипотеку от 5% на весь срок"
-          />
+    <main class="content"></main>
 
-          <button
-            class="slider__button slider__button_prev"
-            type="button"
-          ></button>
-          <button
-            class="slider__button slider__button_next"
-            type="button"
-          ></button>
+    <template id="sliderTemplate"
+      ><ul class="slider">
+        <li class="slider__image-block slider__image-block_left">
+          <img class="slider__image" src="" alt="" />
         </li>
 
-        <li class="slider__image-block">
-          <img
-            src="./img/main-banners_slider1.png"
-            class="slider__image"
-            alt="Подбор участка для жизни"
-          />
+        <li class="slider__image-block slider__image-block_center">
+          <img src="" class="slider__image" alt="" />
 
           <button
             class="slider__button slider__button_prev"
@@ -43,23 +28,11 @@
         </li>
 
         <li class="slider__image-block slider__image-block_right">
-          <img
-            class="slider__image"
-            src="./img/main-banners_slider3.png"
-            alt="Начните строительство"
-          />
-
-          <button
-            class="slider__button slider__button_prev"
-            type="button"
-          ></button>
-          <button
-            class="slider__button slider__button_next"
-            type="button"
-          ></button>
+          <img class="slider__image" src="" alt="" />
         </li>
       </ul>
-    </main>
-    <script src="scripts/script.js"></script>
+    </template>
+
+    <script src="./scripts/script.js"></script>
   </body>
 </html>
