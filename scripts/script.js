@@ -15,35 +15,17 @@ const slidersData = [
     url: "./img/main-banners_slider2.png",
     name: "Строительство в ипотеку от 5% на весь срок",
   },
-  // {
-  //   id: 4,
-  //   url: "./img/main-banners_slider3.png",
-  //   name: "Начните строительство",
-  // },
-  // {
-  //   id: 5,
-  //   url: "./img/main-banners_slider1.png",
-  //   name: "Подбор участка для жизни",
-  // },
-  // {
-  //   id: 6,
-  //   url: "./img/main-banners_slider2.png",
-  //   name: "Строительство в ипотеку от 5% на весь срок",
-  // },
 ];
 const sliderContainer = document.querySelector(".content");
 const slider = document.querySelector(".slider");
 
 class Slider {
   constructor(data) {
-    // this.id = data.id;
-    // this.alt = data.name;
-    // this.img = data.url;
-
     this.slideIndex = 0;
     this.data = data;
     this.sliderTemplate = document.querySelector("#sliderTemplate");
 
+    // данные для будущих элементов
     this.slideLeft = null;
     this.slideCentral = null;
     this.slideRight = null;
@@ -102,12 +84,21 @@ class Slider {
 
   switchRight() {
     this.slideIndex = this.slideIndex + 1;
-    debugger;
+
+    if (this.slideIndex >= this.data.length) {
+      this.slideIndex = 0;
+    }
+
     this.setSliders();
   }
 
   switchLeft() {
     this.slideIndex = this.slideIndex - 1;
+
+    if (this.slideIndex < 0) {
+      this.slideIndex = this.data.length - 1;
+    }
+
     this.setSliders();
   }
 }
