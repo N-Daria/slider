@@ -2,72 +2,53 @@
 const slidersData = [
   {
     id: 1,
-    url: "./img/main-banners_slider2.png",
-    name: "Строительство в ипотеку от 5% на весь срок",
-  },
-  {
-    id: 2,
     url: "./img/main-banners_slider1.png",
     name: "Подбор участка для жизни",
   },
   {
-    id: 3,
+    id: 2,
     url: "./img/main-banners_slider3.png",
     name: "Начните строительство",
   },
+  {
+    id: 3,
+    url: "./img/main-banners_slider2.png",
+    name: "Строительство в ипотеку от 5% на весь срок",
+  },
+  // {
+  //   id: 4,
+  //   url: "./img/main-banners_slider3.png",
+  //   name: "Начните строительство",
+  // },
+  // {
+  //   id: 5,
+  //   url: "./img/main-banners_slider1.png",
+  //   name: "Подбор участка для жизни",
+  // },
+  // {
+  //   id: 6,
+  //   url: "./img/main-banners_slider2.png",
+  //   name: "Строительство в ипотеку от 5% на весь срок",
+  // },
 ];
 const sliderContainer = document.querySelector(".content");
 const slider = document.querySelector(".slider");
 
-// const prevButton = document.querySelector(".slider__button_prev");
-// const nextButton = document.querySelector(".slider__button_next");
-
-// const slides = Array.from(slider.querySelectorAll(".slider__image-block"));
-// const slideCount = slides.length;
-// let slideIndex = 0;
-
-// обработчики событий для кнопок
-// prevButton.addEventListener("click", showPreviousSlide);
-// nextButton.addEventListener("click", showNextSlide);
-
-// показ предыдущего слайда
-function showPreviousSlide() {
-  console.log("prev");
-
-  // slideIndex = (slideIndex - 1 + slideCount) % slideCount;
-  // updateSlider();
-}
-
-// показ следующего слайда
-function showNextSlide() {
-  console.log("next");
-
-  // slideIndex = (slideIndex + 1) % slideCount;
-  // updateSlider();
-}
-
-// обновление отображения слайдера
-function updateSlider() {
-  // slides.forEach((slide, index) => {
-  //   if (index === slideIndex) {
-  //     slide.style.display = "block";
-  //   } else {
-  //     slide.style.display = "none";
-  //   }
-  // });
-}
-
-// Инициализация слайдера
-updateSlider();
-// ___________________________________________________________________________
 class Slider {
   constructor(data) {
     // this.id = data.id;
     // this.alt = data.name;
     // this.img = data.url;
 
+    this.slideIndex = 0;
     this.data = data;
     this.sliderTemplate = document.querySelector("#sliderTemplate");
+
+    this.slideLeft = null;
+    this.slideCentral = null;
+    this.slideRight = null;
+    this.prevButton = null;
+    this.nextButton = null;
   }
 
   generateTemplate() {
@@ -77,6 +58,21 @@ class Slider {
   createSliderImage(block, data) {
     block.querySelector(".slider__image").setAttribute("src", data.url);
     block.querySelector(".slider__image").setAttribute("alt", data.name);
+  }
+
+  setSliders() {
+    // левый слайд
+    this.createSliderImage(
+      this.slideLeft,
+      this.data[this.slideIndex - 1] || this.data[this.data.length - 1]
+    );
+    // центральный слайд
+    this.createSliderImage(this.slideCentral, this.data[this.slideIndex]);
+    // правый слайд
+    this.createSliderImage(
+      this.slideRight,
+      this.data[this.slideIndex + 1] || this.data[0]
+    );
   }
 
   // установка новых значений в шаблон
@@ -89,12 +85,10 @@ class Slider {
     );
     this.slideRight = this.slider.querySelector(".slider__image-block_right");
 
-    // левый слайд
-    this.createSliderImage(this.slideLeft, this.data[0]);
-    // центральный слайд
-    this.createSliderImage(this.slideCentral, this.data[1]);
-    // правый слайд
-    this.createSliderImage(this.slideRight, this.data[2]);
+    this.prevButton = this.slideCentral.querySelector(".slider__button_prev");
+    this.nextButton = this.slideCentral.querySelector(".slider__button_next");
+
+    this.setSliders();
 
     this.setEventListeners();
 
@@ -102,7 +96,19 @@ class Slider {
   }
 
   setEventListeners() {
-    console.log("setEventListeners");
+    this.prevButton.addEventListener("click", () => this.switchLeft());
+    this.nextButton.addEventListener("click", () => this.switchRight());
+  }
+
+  switchRight() {
+    this.slideIndex = this.slideIndex + 1;
+    debugger;
+    this.setSliders();
+  }
+
+  switchLeft() {
+    this.slideIndex = this.slideIndex - 1;
+    this.setSliders();
   }
 }
 
