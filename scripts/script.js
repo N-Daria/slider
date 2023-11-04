@@ -21,7 +21,7 @@ const slider = document.querySelector(".slider");
 
 class Slider {
   constructor(data) {
-    this.slideIndex = 0;
+    this.slideIndex = 1;
     this.data = data;
     this.sliderTemplate = document.querySelector("#sliderTemplate");
 
