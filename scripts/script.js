@@ -2,18 +2,18 @@
 const slidersData = [
   {
     id: 1,
-    url: "./img/main-banners_slider1.png",
+    url: "./img/main-banners_slider2.png",
     name: "Подбор участка для жизни",
+  },
+  {
+    id: 0,
+    url: "./img/main-banners_slider1.png",
+    name: "Строительство в ипотеку от 5% на весь срок",
   },
   {
     id: 2,
     url: "./img/main-banners_slider3.png",
     name: "Начните строительство",
-  },
-  {
-    id: 3,
-    url: "./img/main-banners_slider2.png",
-    name: "Строительство в ипотеку от 5% на весь срок",
   },
 ];
 const sliderContainer = document.querySelector(".content");
@@ -48,13 +48,16 @@ class Slider {
       this.slideLeft,
       this.data[this.slideIndex - 1] || this.data[this.data.length - 1]
     );
+
     // центральный слайд
     this.createSliderImage(this.slideCentral, this.data[this.slideIndex]);
+
     // правый слайд
     this.createSliderImage(
       this.slideRight,
       this.data[this.slideIndex + 1] || this.data[0]
     );
+    // }
   }
 
   // установка новых значений в шаблон
@@ -86,6 +89,7 @@ class Slider {
     this.slideIndex = this.slideIndex + 1;
 
     if (this.slideIndex >= this.data.length) {
+      // отсчет сначала
       this.slideIndex = 0;
     }
 
@@ -96,6 +100,7 @@ class Slider {
     this.slideIndex = this.slideIndex - 1;
 
     if (this.slideIndex < 0) {
+      // отсчет с конца
       this.slideIndex = this.data.length - 1;
     }
 
